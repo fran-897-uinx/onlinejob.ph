@@ -39,7 +39,7 @@ export default function CommonTalents() {
             <Link
               key={idx}
               href={`/talent/${toSlug(talent)}`}
-              className="block px-4 py-3 text-blue-700 dark:text-blue-400 hover:text-blue-900 dark:hover:text-blue-200 transition font-medium"
+              className="block px-5 py-4 rounded-lg border border-gray-200 dark:border-gray-700 bg-white dark:bg-gray-800 shadow-sm hover:shadow-md hover:-translate-y-1 transition transform duration-300 text-gray-700 dark:text-gray-300 font-medium hover:text-blue-700 dark:hover:text-blue-400"
             >
               {talent}
             </Link>

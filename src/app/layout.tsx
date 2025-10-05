@@ -1,9 +1,9 @@
 import type { Metadata } from "next";
-import { Geist, Geist_Mono } from "next/font/google";
-import { ThemeProvider } from "@/components/theme-provider"
+import { Geist, Geist_Mono, Inter } from "next/font/google";
+import { ThemeProvider } from "@/components/theme-provider";
 import "./globals.css";
-import { Navbar } from "./(public)/Navbar";
-import { Footer } from "./(public)/Footer";
+
+const inter = Inter({ subsets: ["latin"] });
 
 const geistSans = Geist({
   variable: "--font-geist-sans",
@@ -28,18 +28,16 @@ export default function RootLayout({
   return (
     <html lang="en" suppressHydrationWarning>
       <body
-        className={`${geistSans.variable} ${geistMono.variable} antialiased`}
+        className={`${geistSans.variable} ${geistMono.variable} antialiased ${inter.className}`}
       >
         <ThemeProvider
-            attribute="class"
-            defaultTheme="system"
-            enableSystem
-            disableTransitionOnChange
+          attribute="class"
+          defaultTheme="system"
+          enableSystem
+          disableTransitionOnChange
         >
-          <Navbar/>
           {children}
-          <Footer/>
-          </ThemeProvider>
+        </ThemeProvider>
       </body>
     </html>
   );

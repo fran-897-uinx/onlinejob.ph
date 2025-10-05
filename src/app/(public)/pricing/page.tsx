@@ -2,6 +2,8 @@
 
 import { useState } from "react";
 import { Testimonials } from "../Testimonials";
+import { Navbar } from "../Navbar";
+import { Footer } from "../Footer";
 
 interface Plan {
   name: string;
@@ -14,17 +16,17 @@ interface Plan {
 }
 
 export default function PricingPage() {
-  const [billingCycle, setBillingCycle] = useState<"monthly" | "annual">("monthly");
-  const [activecard, setActivecard] = useState(false)
+  const [billingCycle, setBillingCycle] = useState<"monthly" | "annual">(
+    "monthly"
+  );
+  const [activeCard, setActiveCard] = useState<number | null>(null);
 
   const plans: Plan[] = [
     {
       name: "FREE",
       price: "$0",
       billing: "forever",
-      limitations: [
-        "Hire & Commuinicating with Workers",
-      ],
+      limitations: ["Hire & Communicate with Workers"],
       features: [
         "Up to 3 Job Posts",
         "Max 15 applications per job",
@@ -35,7 +37,6 @@ export default function PricingPage() {
         "EasyPay",
       ],
       buttonText: "REGISTER",
-      highlight: activecard,
     },
     {
       name: "PRO",
@@ -55,7 +56,6 @@ export default function PricingPage() {
       ],
       limitations: [],
       buttonText: "UPGRADE",
-      highlight: activecard,
     },
     {
       name: "PREMIUM",
@@ -78,104 +78,110 @@ export default function PricingPage() {
       ],
       limitations: [],
       buttonText: "UPGRADE",
-      highlight: activecard,
     },
   ];
 
   return (
-    <section className="bg-gray-200 dark:bg-gray-900 py-16 px-6">
-      <div className="max-w-6xl mx-auto text-center">
-        <h2 className="text-3xl md:text-4xl font-bold text-gray-800 dark:text-gray-200">
-          16,982 employers upgraded this month.
-        </h2>
-        <p className="mt-4 text-gray-600 dark:text-gray-400">
-          Hire direct. <span className="font-bold">No salary markups or ongoing fees.</span>
-        </p>
+    <>
+      <Navbar />
 
-        {/* Billing Toggle */}
-        <div className="flex justify-center mt-6 space-x-4">
-          <button
-            onClick={() => setBillingCycle("monthly")}
-            className={`px-4 py-2 rounded-lg font-medium ${
-              billingCycle === "monthly"
-                ? "bg-blue-600 text-white"
-                : "bg-gray-200 dark:bg-gray-700 text-gray-700 dark:text-gray-300"
-            }`}
-          >
-            Monthly
-          </button>
-          <button
-            onClick={() => setBillingCycle("annual")}
-            className={`px-4 py-2 rounded-lg font-medium ${
-              billingCycle === "annual"
-                ? "bg-blue-600 text-white"
-                : "bg-gray-200 dark:bg-gray-700 text-gray-700 dark:text-gray-300"
-            }`}
-          >
-            Annual
-          </button>
-        </div>
-      </div>
+      <section className="bg-gray-200 dark:bg-gray-900 py-16 px-6">
+        <div className="max-w-6xl mx-auto text-center">
+          <h2 className="text-3xl md:text-4xl font-bold text-gray-800 dark:text-gray-200">
+            16,982 employers upgraded this month.
+          </h2>
+          <p className="mt-4 text-gray-600 dark:text-gray-400">
+            Hire direct.{" "}
+            <span className="font-bold">
+              No salary markups or ongoing fees.
+            </span>
+          </p>
 
-      {/* Pricing Cards */}
-      <div className="mt-12 grid grid-cols-1 md:grid-cols-3 gap-8 max-w-6xl mx-auto">
-        {plans.map((plan, idx) => (
-          <div
-            key={idx}
-            className={`rounded-xl shadow-lg p-8 flex flex-col justify-between transition transform hover:scale-105 ${
-              plan.highlight
-                ? "border-4 border-blue-600 bg-white dark:bg-gray-800"
-                : "bg-white dark:bg-gray-800"
-            }`}
-          >
-            <div>
-              <h3 className="text-xl font-bold text-gray-800 dark:text-gray-200">
-                {plan.name}
-              </h3>
-              <p className="text-3xl font-extrabold text-blue-600 dark:text-blue-400 mt-2">
-                {plan.price}
-              </p>
-              <p className="text-sm text-gray-600 dark:text-gray-400">
-                {plan.billing}
-              </p>
-
-              <ul className="mt-6 space-y-3 text-left">
-                {plan.features.map((feature, i) => (
-                  <li
-                    key={i}
-                    className="text-gray-700 dark:text-gray-300 flex items-start"
-                  >
-                    ✅ <span className="ml-2">{feature}</span>
-                  </li>
-                ))}
-                {plan.limitations.map((lim, i) => (
-                  <li
-                    key={i}
-                    className="text-gray-500 dark:text-gray-400 flex items-start line-through"
-                  >
-                    ❌<span className="ml-2">{lim}</span>
-                  </li>
-                ))}
-              </ul>
-            </div>
-
+          {/* Billing Toggle */}
+          <div className="flex justify-center mt-6 space-x-4">
             <button
-              className={`mt-8 px-6 py-3 rounded-lg font-bold  ${
-                activecard === true
-                  ? "bg-blue-600 hover:bg-blue-700 text-white"
-                  : "border border-blue-600 text-blue-600 hover:bg-blue-50 dark:hover:bg-gray-700 cursor-pointer"
-                }`}
-              onClick={() => setActivecard(true)}
-              onDoubleClick={()=>setActivecard(false)}
+              onClick={() => setBillingCycle("monthly")}
+              className={`px-4 py-2 rounded-lg font-medium ${
+                billingCycle === "monthly"
+                  ? "bg-blue-600 text-white"
+                  : "bg-gray-200 dark:bg-gray-700 text-gray-700 dark:text-gray-300"
+              }`}
             >
-              {plan.buttonText}
+              Monthly
+            </button>
+            <button
+              onClick={() => setBillingCycle("annual")}
+              className={`px-4 py-2 rounded-lg font-medium ${
+                billingCycle === "annual"
+                  ? "bg-blue-600 text-white"
+                  : "bg-gray-200 dark:bg-gray-700 text-gray-700 dark:text-gray-300"
+              }`}
+            >
+              Annual
             </button>
           </div>
-        ))}
-      </div>
-      <div className="mt-20">
-        <Testimonials/>
-      </div>
-    </section>
+        </div>
+
+        {/* Pricing Cards */}
+        <div className="mt-12 grid grid-cols-1 md:grid-cols-3 gap-8 max-w-6xl mx-auto">
+          {plans.map((plan, idx) => (
+            <div
+              key={idx}
+              className={`rounded-xl shadow-lg p-8 flex flex-col justify-between transition transform hover:scale-105 ${
+                activeCard === idx
+                  ? "border-4 border-blue-600 bg-white dark:bg-gray-800"
+                  : "bg-white dark:bg-gray-800"
+              }`}
+            >
+              <div>
+                <h3 className="text-xl font-bold text-gray-800 dark:text-gray-200">
+                  {plan.name}
+                </h3>
+                <p className="text-3xl font-extrabold text-blue-600 dark:text-blue-400 mt-2">
+                  {plan.price}
+                </p>
+                <p className="text-sm text-gray-600 dark:text-gray-400">
+                  {plan.billing}
+                </p>
+
+                <ul className="mt-6 space-y-3 text-left">
+                  {plan.features.map((feature, i) => (
+                    <li
+                      key={i}
+                      className="text-gray-700 dark:text-gray-300 flex items-start"
+                    >
+                      ✅ <span className="ml-2">{feature}</span>
+                    </li>
+                  ))}
+                  {plan.limitations.map((lim, i) => (
+                    <li
+                      key={i}
+                      className="text-gray-500 dark:text-gray-400 flex items-start line-through"
+                    >
+                      ❌<span className="ml-2">{lim}</span>
+                    </li>
+                  ))}
+                </ul>
+              </div>
+
+              <button
+                className={`mt-8 px-6 py-3 rounded-lg font-bold  ${
+                  activeCard === idx
+                    ? "bg-blue-600 hover:bg-blue-700 text-white"
+                    : "border border-blue-600 text-blue-600 hover:bg-blue-50 dark:hover:bg-gray-700 cursor-pointer"
+                }`}
+                onClick={() => setActiveCard(idx)}
+              >
+                {plan.buttonText}
+              </button>
+            </div>
+          ))}
+        </div>
+        <div className="mt-20">
+          <Testimonials />
+        </div>
+      </section>
+      <Footer />
+    </>
   );
 }

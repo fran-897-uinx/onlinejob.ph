@@ -2,7 +2,7 @@
 
 import Link from "next/link";
 import { useState } from "react";
-import { ChevronDown, Moon, Sun } from "lucide-react";
+import { ChevronDown, Moon, Sun, LucideMenu, X } from "lucide-react";
 import { useTheme } from "next-themes";
 
 import { Button } from "@/components/ui/button";
@@ -12,11 +12,13 @@ import {
   DropdownMenuItem,
   DropdownMenuTrigger,
 } from "@/components/ui/dropdown-menu";
+import { Separator } from "@radix-ui/react-dropdown-menu";
 
 export function Navbar() {
   const [isOpen, setIsOpen] = useState(false);
   const [open, setOpen] = useState(false);
   const { setTheme } = useTheme();
+  const handleNavClick = () => setIsOpen(false);
 
   return (
     <nav className="bg-white dark:bg-gray-900 shadow-sm sticky top-0 z-50 transition-colors duration-300">
@@ -33,7 +35,7 @@ export function Navbar() {
         </Link>
 
         {/* Desktop Menu */}
-        <div className="hidden md:flex gap-6 items-center font-medium">
+        <div className="hidden xl:flex justify-between gap-6 items-center font-medium">
           <div className="relative">
             <button
               onClick={() => setOpen(!open)}
@@ -50,21 +52,21 @@ export function Navbar() {
                   className="block px-4 py-2 hover:bg-gray-100 dark:hover:bg-gray-700 font-light"
                   onClick={() => setOpen(false)}
                 >
-                  Employer-FAQ
+                  Post a Project or Job
                 </Link>
                 <Link
                   href="#step2"
                   className="block px-4 py-2 hover:bg-gray-100 dark:hover:bg-gray-700 font-light"
                   onClick={() => setOpen(false)}
                 >
-                  Jobseeker-FAQ
+                  Match with Experts
                 </Link>
                 <Link
                   href="#step3"
                   className="block px-4 py-2 hover:bg-gray-100 dark:hover:bg-gray-700 font-light"
                   onClick={() => setOpen(false)}
                 >
-                  Learn to outsource
+                  Collaborate Securely
                 </Link>
               </div>
             )}
@@ -77,20 +79,20 @@ export function Navbar() {
             Pricing
           </Link>
           <Link
-            href="#main"
+            href="/realresult"
             className="hover:text-blue-600 dark:hover:text-blue-400 transition font-light"
           >
             Real Result
           </Link>
           <Link
-            href="#contact"
+            href="/project"
             className="hover:bg-blue-600 dark:hover:bg-blue-700 transition uppercase rounded-3xl bg-blue-900 text-white p-2.5 px-6"
           >
             Post a Project
           </Link>
           <Link
-            href="#contact"
-            className="hover:bg-green-600 dark:hover:bg-green-500 transition uppercase rounded-3xl bg-green-400 text-white p-2.5 px-7"
+            href="/job"
+            className="hover:bg-gray-400 dark:hover:bg-gray-500 transition uppercase rounded-3xl bg-gradient-to-l bg-gray-600 text-white p-2.5 px-7"
           >
             Post a Job
           </Link>
@@ -132,100 +134,40 @@ export function Navbar() {
 
         {/* Mobile Menu Button */}
         <button
-          className="md:hidden flex items-center text-gray-600 dark:text-gray-200"
+          className="min-lg:hidden flex items-center text-gray-600 dark:text-gray-200"
           onClick={() => setIsOpen(!isOpen)}
         >
-          ☰
+          <LucideMenu className="h-6 w-6" />
+          <span className="sr-only">Menu</span>
         </button>
       </div>
 
-      {/* Mobile Dropdown */}
-      {isOpen && (
-        <div className="md:hidden bg-white dark:bg-gray-900 shadow-inner px-4 py-3 space-y-3 transition-transform">
-          <div className="relative">
-                      <Link
-            href="/"
-            className="block hover:text-blue-600 dark:hover:text-blue-400"
+      {/* Sidebar for Mobile */}
+      <div
+        className={`fixed top-0 left-0 h-full w-84 bg-white dark:bg-gray-900 shadow-lg z-50 transform transition-transform duration-300 ${
+          isOpen ? "translate-x-0" : "-translate-x-full"
+        }`}
+      >
+        {/* Close Button */}
+        <div className="flex justify-between items-center px-4 py-3 border-b border-gray-200 dark:border-gray-700">
+          <span className="text-lg font-bold text-blue-950 dark:text-gray-100">
+            Menu
+          </span>
+          <button
+            className="text-gray-600 dark:text-gray-200"
+            onClick={() => setIsOpen(false)}
           >
-            Home
-          </Link>
-            <button
-              onClick={() => setOpen(!open)}
-              className="flex items-center hover:text-blue-600 dark:hover:text-blue-400"
-            >
-              How it works
-              <ChevronDown className="ml-1 w-4 h-4" />
-            </button>
+            <X className="h-6 w-6" />
+          </button>
+        </div>
 
-            {open && (
-              <div className="absolute top-full mt-2 w-48 bg-white dark:bg-gray-800 border border-gray-200 dark:border-gray-700 rounded-lg shadow-lg">
-                <Link
-                  href="#step1"
-                  className="block px-4 py-2 hover:bg-gray-100 dark:hover:bg-gray-700 font-light"
-                  onClick={() => setOpen(false)}
-                >
-                  Employer-FAQ
-                </Link>
-                <Link
-                  href="#step2"
-                  className="block px-4 py-2 hover:bg-gray-100 dark:hover:bg-gray-700 font-light"
-                  onClick={() => setOpen(false)}
-                >
-                  Jobseeker-FAQ
-                </Link>
-                <Link
-                  href="#step3"
-                  className="block px-4 py-2 hover:bg-gray-100 dark:hover:bg-gray-700 font-light"
-                  onClick={() => setOpen(false)}
-                >
-                  Learn to outsource
-                </Link>
-              </div>
-            )}
-          </div>
-
-          <Link
-            href="/pricing/"
-            className="block hover:text-blue-600 dark:hover:text-blue-400"
-          >
-            Pricing
-          </Link>
-          <Link
-            href="#about"
-            className="block hover:text-blue-600 dark:hover:text-blue-400"
-          >
-            Real Result
-          </Link>
-          <Link
-            href="#main"
-            className="block hover:bg-blue-600 dark:hover:bg-blue-700 transition uppercase rounded-3xl bg-blue-900 text-white p-2.5 px-6 font-bold"
-          >
-            Post A Project
-          </Link>
-          <Link
-            href="#contact"
-            className="block hover:bg-green-600 dark:hover:bg-green-500 transition uppercase rounded-3xl bg-green-400 text-white p-2.5 px-7 font-bold"
-          >
-            Post a Job
-          </Link>
-          <Link
-            href="/login/"
-            className="block text-blue-950 dark:text-gray-100 px-1 py-2 transition uppercase text-xs border-b-2 font-medium"
-          >
-            Login
-          </Link>
-          <Link
-            href="/Signup/"
-            className="block text-blue-950 dark:text-gray-100 px-2 py-2 transition uppercase text-xs border-b-2 font-medium"
-          >
-            Sign Up
-          </Link>
+        <div className="flex flex-col px-4 py-6 space-y-4">
+          {/* Theme Switcher */}
           <DropdownMenu>
             <DropdownMenuTrigger asChild>
               <Button variant="outline" size="icon">
                 <Sun className="h-[1.2rem] w-[1.2rem] scale-100 rotate-0 transition-all dark:scale-0 dark:-rotate-90" />
                 <Moon className="absolute h-[1.2rem] w-[1.2rem] scale-0 rotate-90 transition-all dark:scale-100 dark:rotate-0" />
-                <span className="sr-only">Toggle theme</span>
               </Button>
             </DropdownMenuTrigger>
             <DropdownMenuContent align="end">
@@ -240,7 +182,100 @@ export function Navbar() {
               </DropdownMenuItem>
             </DropdownMenuContent>
           </DropdownMenu>
+          <Link
+            href="/"
+            onClick={handleNavClick}
+            className="hover:text-blue-600 dark:hover:text-blue-400 hover:bg-gray-500 p-2 pl-3  text-black dark:text-white  px-4 py-2 rounded-lg "
+          >
+            Home
+          </Link>
+          <div className="relative">
+            <button
+              onClick={() => setOpen(!open)}
+              className="flex items-center hover:text-blue-600 dark:hover:text-blue-400 transition cursor-pointer font-light hover:bg-gray-500 p-2 pl-1.5  text-black dark:text-white px-4 py-2 rounded-lg text-center"
+            >
+              How it works
+              <ChevronDown className="ml-1 w-4 h-4" />
+            </button>
+
+            {open && (
+              <div className="absolute top-full mt-2 w-48 bg-white dark:bg-gray-800 border border-gray-200 dark:border-gray-700 rounded-lg shadow-lg">
+                <Link
+                  href="#step1"
+                  className="block px-4 py-2 hover:bg-gray-100 dark:hover:bg-gray-700 font-light"
+                  onClick={() => setOpen(false)}
+                >
+                  Post a Project or Job
+                </Link>
+                <Link
+                  href="#step2"
+                  className="block px-4 py-2 hover:bg-gray-100 dark:hover:bg-gray-700 font-light"
+                  onClick={() => setOpen(false)}
+                >
+                  Match with Experts
+                </Link>
+                <Link
+                  href="#step3"
+                  className="block px-4 py-2 hover:bg-gray-100 dark:hover:bg-gray-700 font-light"
+                  onClick={() => setOpen(false)}
+                >
+                  Collaborate Securely
+                </Link>
+              </div>
+            )}
+          </div>
+          <Link
+            href="/pricing"
+            onClick={handleNavClick}
+            className="hover:text-blue-600 dark:hover:text-blue-400 hover:bg-gray-500 p-2 pl-3  text-black dark:text-white px-4 py-2 rounded-lg"
+          >
+            Pricing
+          </Link>
+          <Link
+            href="/realresult"
+            onClick={handleNavClick}
+            className="hover:text-blue-600 dark:hover:text-blue-400 hover:bg-gray-500 p-2 pl-3  text-black dark:text-white px-4 py-2 rounded-lg"
+          >
+            Real Result
+          </Link>
+          <Link
+            href="/project"
+            onClick={handleNavClick}
+            className="hover:text-blue-600 dark:hover:text-blue-400 hover:bg-blue-900 p-2 pl-3  text-black dark:text-white px-4 py-2 rounded-lg"
+          >
+            Post a Project
+          </Link>
+          <Link
+            href="/job"
+            onClick={handleNavClick}
+            className="hover:text-blue-600 dark:hover:text-blue-400 hover:bg-gray-700 p-2 pl-3  text-black dark:text-white px-4 py-2 rounded-lg"
+          >
+            Post a Job
+          </Link>
+          <Separator className="bg-gray-700 dark:bg-gray-100 border-2 border-gray-700 dark:border-gray-100" />
+          <Link
+            href="/login/"
+            onClick={handleNavClick}
+            className="hover:text-blue-600 dark:hover:text-blue-400 hover:bg-gray-500 p-2 pl-3  text-black dark:text-white px-4 py-1 rounded-lg"
+          >
+            Login
+          </Link>
+          <Link
+            href="/Signup/"
+            onClick={handleNavClick}
+            className="hover:text-blue-600 dark:hover:text-blue-400 hover:bg-gray-500 p-2 pl-3  text-black dark:text-white px-4 py-2 rounded-lg"
+          >
+            Sign Up
+          </Link>
         </div>
+      </div>
+
+      {/* Overlay for closing sidebar */}
+      {isOpen && (
+        <div
+          className="fixed inset-0 bg-black/40 z-40"
+          onClick={() => setIsOpen(false)}
+        />
       )}
     </nav>
   );

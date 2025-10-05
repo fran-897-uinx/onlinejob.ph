@@ -1,0 +1,1 @@
+let start the configuraton again and will have google login with githu login  with normal signup and normal login and after the users have signup it redirect them to the login page and when they login it will redirect them to the inner configured page 

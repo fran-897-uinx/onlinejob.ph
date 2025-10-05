@@ -8,6 +8,8 @@ import {
   Shield,
 } from "lucide-react";
 import { JSX } from "react";
+import { Footer } from "../Footer";
+import { Navbar } from "../Navbar";
 
 export default function TalentsPage() {
   // Grouped categories
@@ -103,37 +105,44 @@ export default function TalentsPage() {
     name.toLowerCase().replace(/\s+/g, "-");
 
   return (
-    <section className="py-20 bg-gray-50 dark:bg-gray-900 transition-colors duration-300">
-      <div className="container mx-auto px-6">
-        <h1 className="text-3xl md:text-4xl font-extrabold text-center text-gray-800 dark:text-gray-100 mb-16 tracking-tight">
-          Explore <span className="text-blue-700 dark:text-blue-400">Automation Talents</span>
-        </h1>
+    <>
+      <Navbar />
+      <section className="py-20 bg-gray-50 dark:bg-gray-900 transition-colors duration-300">
+        <div className="container mx-auto px-6">
+          <h1 className="text-3xl md:text-4xl font-extrabold text-center text-gray-800 dark:text-gray-100 mb-16 tracking-tight">
+            Explore{" "}
+            <span className="text-blue-700 dark:text-blue-400">
+              Automation Talents
+            </span>
+          </h1>
 
-        {/* Loop through categories */}
-        {Object.entries(talentCategories).map(([category, talents]) => (
-          <div
-            key={category}
-            className="mb-16 border-b border-gray-200 dark:border-gray-700 pb-10"
-          >
-            <h2 className="text-2xl font-semibold text-blue-900 dark:text-blue-300 mb-6 flex items-center gap-3">
-              {categoryIcons[category]}
-              {category}
-            </h2>
+          {/* Loop through categories */}
+          {Object.entries(talentCategories).map(([category, talents]) => (
+            <div
+              key={category}
+              className="mb-16 border-b border-gray-200 dark:border-gray-700 pb-10"
+            >
+              <h2 className="text-2xl font-semibold text-blue-900 dark:text-blue-300 mb-6 flex items-center gap-3">
+                {categoryIcons[category]}
+                {category}
+              </h2>
 
-            <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-4">
-              {talents.map((talent, idx) => (
-                <Link
-                  key={idx}
-                  href={`/talent/${toSlug(talent)}`}
-                  className="block px-5 py-4 rounded-lg border border-gray-200 dark:border-gray-700 bg-white dark:bg-gray-800 shadow-sm hover:shadow-md hover:-translate-y-1 transition transform duration-300 text-gray-700 dark:text-gray-300 font-medium hover:text-blue-700 dark:hover:text-blue-400"
-                >
-                  {talent}
-                </Link>
-              ))}
+              <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-4">
+                {talents.map((talent, idx) => (
+                  <Link
+                    key={idx}
+                    href={`/talent/${toSlug(talent)}`}
+                    className="block px-5 py-4 rounded-lg border border-gray-200 dark:border-gray-700 bg-white dark:bg-gray-800 shadow-sm hover:shadow-md hover:-translate-y-1 transition transform duration-300 text-gray-700 dark:text-gray-300 font-medium hover:text-blue-700 dark:hover:text-blue-400"
+                  >
+                    {talent}
+                  </Link>
+                ))}
+              </div>
             </div>
-          </div>
-        ))}
-      </div>
-    </section>
+          ))}
+        </div>
+      </section>
+      <Footer />
+    </>
   );
 }

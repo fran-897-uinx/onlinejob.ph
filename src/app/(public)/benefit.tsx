@@ -31,7 +31,7 @@ export default function Benefits() {
           Why Choose{" "}
           <span className="text-blue-900 dark:text-blue-800">
             PLC
-            <span className="border-l-3 mx-2 px-2">Hire</span>
+            <span className="border-l-3 mx-2 pl-2">Hire</span>
           </span>
           ?
         </h2>

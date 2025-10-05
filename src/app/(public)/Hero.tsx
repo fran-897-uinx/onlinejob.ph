@@ -19,7 +19,10 @@ export default function Hero() {
           {/* Search Resumes */}
           <div className="grid">
             <h1 className="text-2xl text-center font-semibold text-gray-600 dark:text-gray-300 mb-2 md:text-start">
-              Looking for <span className="text-blue-700 dark:text-blue-400">Engineers</span>?
+              Looking for{" "}
+              <span className="text-blue-700 dark:text-blue-400">
+                Engineers?
+              </span>
             </h1>
             <span className="flex items-center justify-center gap-3 px-2 py-3 w-full bg-white dark:bg-gray-800 text-blue-700 dark:text-blue-300 rounded-3xl shadow transition font-semibold text-lg md:px-4">
               <Search className="w-6 h-6" />
@@ -33,11 +36,14 @@ export default function Hero() {
               </button>
             </span>
           </div>
- 
+
           {/* Search Jobs */}
           <div className="grid pl-3">
             <h1 className="text-2xl text-center font-semibold text-gray-600 dark:text-gray-300 mb-2 md:text-start">
-              Looking for <span className="text-green-500 dark:text-green-400">Projects</span>?
+              Looking for{" "}
+              <span className="text-gray-800 dark:text-gray-600">
+                Projects?
+              </span>
             </h1>
             <span className="flex items-center justify-center gap-3 px-2 md:px-4 py-3 bg-white dark:bg-gray-800 text-blue-700 dark:text-blue-300 rounded-3xl shadow transition font-semibold text-lg">
               <Search className="w-6 h-6" />
